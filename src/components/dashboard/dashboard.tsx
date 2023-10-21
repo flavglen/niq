@@ -1,50 +1,57 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ProductProvider, useProductContext } from '../../context/productContext';
+import Typography from '@mui/material/Typography';
+import { useProductContext } from '../../context/productContext';
 import Filters from '../filters/Filters';
 import BarChart from '../bar-chart/barChart';
 import ProductTable from '../product-table/productTable';
 import ProductDetailView from '../product-detail-view/productDetailView';
 
+
 const DashboardWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  gap:30px;
+  margin-top: 25px;
 `;
 
 const FilterColumn = styled.div`
-  width: 30%;
+  width: 35%;
   padding: 10px;
-  background-color: #f1f1f1;
 `;
 
 const ProductDetailsWrapper = styled.div`
-  width: 68%;
+  width: 63%;
 `;
 
-const  Dashboard = () => {
- const { selectedProduct} = useProductContext()
-  return (
+const Dashboard = () => {
+    const { selectedProductId, selectedProducts } = useProductContext()
+    return (
         <DashboardWrapper className='dashboard'>
             <FilterColumn className='filter-column'>
                 <Filters />
             </FilterColumn>
 
             <ProductDetailsWrapper className='product-details'>
-                {!selectedProduct && (
+                {!selectedProducts.length && (
+                    <Typography variant="body1" component="span">
+                        Please select a Category
+                    </Typography>
+                )}
+                {!selectedProductId && selectedProducts.length > 0 && (
                     <>
-                    <BarChart />
-                    <ProductTable />
-                </>
+                        <BarChart />
+                        <ProductTable />
+                    </>
                 )}
 
-                {selectedProduct && (
+                {selectedProductId && (
                     <ProductDetailView />
                 )}
 
             </ProductDetailsWrapper>
         </DashboardWrapper>
-  )
+    )
 }
 
 export default Dashboard;

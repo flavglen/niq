@@ -1,32 +1,32 @@
-import React, { 
-    createContext, 
-    useState,
-    Dispatch, 
-    SetStateAction,
-    useContext,
-    useEffect
+import React, {
+  createContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+  useContext,
 } from 'react';
 import { IProduct } from '../components/models/Product';
 
 type IproductContext = {
-    selectedProducts: IProduct[]
-    setSelectedProducts: Dispatch<SetStateAction<IProduct[]>>;
-    selectedProduct: IProduct|undefined;
-    setSelectedProduct: Dispatch<SetStateAction<IProduct|undefined>>;
+  selectedProducts: IProduct[]
+  setSelectedProducts: Dispatch<SetStateAction<IProduct[]>>;
+  selectedProductId: number | string;
+  setSelectedProductId: Dispatch<SetStateAction<number | string>>;
 }
 
 const ProductContext = createContext<IproductContext | undefined>(undefined);
 
- const ProductProvider = ({ children }) => {
-    // stores products that we get while selecting the category
+const ProductProvider = ({ children }) => {
+  // stores products that we get while selecting the category
   const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<IProduct|undefined>();
+  // store selected product id for product detail page
+  const [selectedProductId, setSelectedProductId] = useState<number | string>('');
 
   const values = {
     selectedProducts,
     setSelectedProducts,
-    selectedProduct,
-    setSelectedProduct
+    selectedProductId,
+    setSelectedProductId
   }
 
   return (
@@ -36,13 +36,13 @@ const ProductContext = createContext<IproductContext | undefined>(undefined);
   );
 }
 
- const useProductContext = () => {
-    const context = useContext(ProductContext);
-    if (context === undefined) {
-      throw new Error('useProductContext must be used within a ProductProvider');
-    }
-    return context;
+const useProductContext = () => {
+  const context = useContext(ProductContext);
+  if (context === undefined) {
+    throw new Error('useProductContext must be used within a ProductProvider');
+  }
+  return context;
 }
 
 
-export {ProductProvider, useProductContext };
+export { ProductProvider, useProductContext };

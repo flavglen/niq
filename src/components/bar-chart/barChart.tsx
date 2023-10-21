@@ -1,45 +1,69 @@
 import React from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import Box from '@mui/material/Box';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material';
 import { useProductContext } from '../../context/productContext';
 
 const BarChart = () => {
-const { selectedProducts} = useProductContext();
+  const { selectedProducts } = useProductContext();
+  const [chartType, setChartType] = React.useState<string>('Price');
   const generateBarChartOptions = () => {
     const options = {
-        chart: {
-          type: 'column',
-        },
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: `${chartType} Comparison`,
+      },
+      xAxis: {
         title: {
-          text: 'Price Comparison',
+          text: 'Product Title',
         },
-        xAxis: {
-          title: {
-            text: 'Product Title',
-          },
-          categories: selectedProducts.map(product => product.title),
+        categories: selectedProducts.map(product => product.title),
+      },
+      yAxis: {
+        title: {
+          text: chartType
         },
-        yAxis: {
-          title: {
-            text: 'Price',
-          },
-          tickInterval: 150,
+        tickInterval: 150,
+      },
+      series: [
+        {
+          name: chartType,
+          data: chartType === 'Price' ? selectedProducts.map(product => product.price) : selectedProducts.map(product => product.rating.count),
         },
-        series: [
-          {
-            name: 'Price',
-            data: selectedProducts.map(product => product.price),
-          },
-        ],
-      };
+      ],
+    };
 
-      return options;
+    return options;
   }
 
-  const chartOptions =  generateBarChartOptions();
+  const changeChart = (e: SelectChangeEvent) => {
+    const value = e.target.value;
+    setChartType(value);
+  }
+
+  const chartOptions = generateBarChartOptions();
 
   return (
-     <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+    <Box component="div" style={{border: '1px solid rgba(224, 224, 224, 1)', marginBottom: 15}}>
+      <FormControl variant="outlined" style={{ width: '350px', margin: 20 }}>
+        <InputLabel id="dropdown-label">Products</InputLabel>
+        <Select
+          labelId="dropdown-label"
+          value={chartType}
+          onChange={changeChart}
+          label="Select an Option"
+        >
+          <MenuItem value="Price">Price</MenuItem>
+          <MenuItem value="Rating">Rating</MenuItem>
+        </Select>
+      </FormControl>
+
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+    </Box>
   )
 }
 

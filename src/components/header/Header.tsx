@@ -1,11 +1,21 @@
 import React from 'react';
-import './Header.css'
+import styled from 'styled-components';
+
+const CustomHeader = styled.header`
+display: flex;
+height: 65px;
+align-items: center;
+justify-content: center;
+background-color: #181818;
+color: #fff;
+font-size: 2.5rem;
+`
 
 const  Header = () => {
   return (
-    <header className="header">
-        MY SHOP
-    </header>
+    <CustomHeader className="header">
+        My Fabulous Store
+    </CustomHeader>
   )
 }
 

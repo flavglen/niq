@@ -9,5 +9,12 @@ Build Your React App:
 ### Run npm run build
 ### Deploy to github pages or Heroku or firebase hosting
 
+Host on firebase
+### npm tun deploy
+
+
+Homepage
+https://flavglen.github.io/niq
+
 Created by Glen
 https://flavglen.github.io

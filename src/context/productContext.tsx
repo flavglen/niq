@@ -5,7 +5,7 @@ import React, {
   SetStateAction,
   useContext,
 } from 'react';
-import { IProduct } from '../components/models/Product';
+import { IProduct } from '../models/Product';
 
 type IproductContext = {
   selectedProducts: IProduct[]

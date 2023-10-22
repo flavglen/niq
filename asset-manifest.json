@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/niq/static/css/main.31d6cfe0.css",
+    "main.js": "/niq/static/js/main.1b1728b8.js",
+    "static/js/787.070584a2.chunk.js": "/niq/static/js/787.070584a2.chunk.js",
+    "index.html": "/niq/index.html",
+    "main.1b1728b8.js.map": "/niq/static/js/main.1b1728b8.js.map",
+    "787.070584a2.chunk.js.map": "/niq/static/js/787.070584a2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.1b1728b8.js"
+  ]
+}

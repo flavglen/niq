@@ -116,7 +116,7 @@ const Filters = () => {
                     >
                         {
                             selectedProducts.map(product => (
-                                <MenuItem value={product.id}>{product.title}</MenuItem>
+                                <MenuItem key={product.id} value={product.id}>{product.title}</MenuItem>
                             ))
                         }
                     </Select>
